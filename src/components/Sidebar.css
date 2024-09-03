@@ -1,0 +1,4 @@
+.sidebar-option:hover {
+    background-color: rgba(29,161,242, 0.15);
+    cursor: pointer;
+}
