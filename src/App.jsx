@@ -1,61 +1,22 @@
-import React, { useEffect, useContext } from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate, Outlet, useNavigate } from 'react-router-dom';
-
-import AuthContext, { AuthContextProvider } from "./contexts/AuthContext";
-import AuthManager from "./components/AuthManager";
-import { USER_STATE } from "./contexts/AuthContext";
-
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
-import LogIn from './pages/login';
-import Register from './pages/register';
-import Home from './pages/home';
-import Profile from './pages/profile';
-import Tweet from './pages/tweet';
-import NotFound from './pages/not-found';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Register from './components/Register'; // Ensure this path is correct
+import Login from './components/Login';
 
 function App() {
   return (
-    <AuthContextProvider>
-      <AuthManager>
-        <Router>
-          <Routes>
-            <Route path='/login' element={<LogIn />} />
-            <Route path='/register' element={<Register />} />
-            
-            {/* Protected Routes */}
-            <Route element={<PersistantLogin />}>
-              <Route path='/' element={<Home />} />
-              <Route path='/profile/:id' element={<Profile />} />
-              <Route path='/tweet/:id' element={<Tweet />} />
-            </Route>
-            
-            {/* Catch-all route for 404 */}
-            <Route path='/404' element={<NotFound />} />
-            <Route path='*' element={<Navigate to="/404" />} />
-          </Routes>
-        </Router>
-      </AuthManager>
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-      />
-    </AuthContextProvider>
+    <Router>
+      <Routes>
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        {/* Add other routes here */}
+        <Route path="/" element={<Home />} /> {/* Home component as the main page */}
+      </Routes>
+    </Router>
   );
 }
 
-function PersistantLogin() {
-  const navigate = useNavigate();
-  const { user } = useContext(AuthContext);
-
-  useEffect(() => {
-    if (user.state === USER_STATE.FAILED) navigate('/login');
-  }, [user.state, navigate]);
-
-  return <Outlet />;
-}
-
 export default App;
+
 
 
