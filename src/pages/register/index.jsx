@@ -5,19 +5,21 @@ import { toast } from 'react-toastify';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComments } from '@fortawesome/free-regular-svg-icons';
 
-import register from '../../services/auth/register';
+import register from '../../services/auth/register'; // Ensure this path is correct
 
 export default function Register() {
   const navigate = useNavigate();
 
   const [fullName, setFullName] = React.useState('');
-  const [email, setEmail] = React.useState(''); 
+  const [email, setEmail] = React.useState('');
   const [username, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [error, setError] = React.useState('');
 
   const handleRegister = async (e) => {
     e.preventDefault();
+    setError(''); // Clear previous errors
+
     if (!fullName || !email || !username || !password) {
       setError('Please fill all fields');
       return;
@@ -28,7 +30,8 @@ export default function Register() {
       toast.success('Registered successfully');
       navigate('/login');
     } catch (error) {
-      toast.error(error.message);
+      console.error('Registration error:', error); // Log the full error
+      toast.error(error.response?.data?.message || 'Registration failed');
     }
   }
 
@@ -44,7 +47,7 @@ export default function Register() {
           />
         </div>
 
-        <div className="d-flex flex-column justify-content-center w-60 p-4" style={{width: '60%'}}>
+        <div className="d-flex flex-column justify-content-center w-60 p-4" style={{ width: '60%' }}>
           <p className="fs-2 fw-bold">Register</p>
 
           <form onSubmit={handleRegister}>
@@ -90,3 +93,4 @@ export default function Register() {
     </div>
   );
 }
+
