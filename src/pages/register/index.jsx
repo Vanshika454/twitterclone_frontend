@@ -87,10 +87,9 @@ export default function Register() {
             <button type="submit" className="btn btn-dark mb-4 px-4">Register</button>
           </form>
 
-          <p className='fs-6'>Already have an account?<a href="/login" className='fw-semibold m-lg-1' style={{ color: '#1DA1F2' }}>Login here</a></p>
+          <p className='fs-6'>Already have an account? <a href="/login" className='fw-semibold m-lg-1' style={{ color: '#1DA1F2' }}>Login here</a></p>
         </div>
       </div>
     </div>
   );
 }
-
