@@ -1,8 +1,9 @@
 [build]
   command = "npm run build"
-  publish="path-to-react-app/build"
+  publish = "build"  # This should point to your build folder
   base = "."
-  [[redirects]]
+
+[[redirects]]
   from = "/*"
-  to = "/index.html" 
-  status = 200  
+  to = "/index.html"
+  status = 200
