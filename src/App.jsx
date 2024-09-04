@@ -17,33 +17,31 @@ import NotFound from './pages/not-found';
 
 function App() {
   return (
-    <>
-      <AuthContextProvider>
-        <AuthManager>
-          <Router>
-            <Routes>
-              <Route path='/login' element={<LogIn />} />
-              <Route path='/register' element={<Register />} />
-              
-              {/* Protected Routes */}
-              <Route element={<PersistantLogin />}>
-                <Route path='/' element={<Home />} />
-                <Route path='/profile/:id' element={<Profile />} />
-                <Route path='/tweet/:id' element={<Tweet />} />
-              </Route>
-              
-              {/* Catch-all route for 404 */}
-              <Route path='*' element={<Navigate to="/404" />} />
-              <Route path='/404' element={<NotFound />} />
-            </Routes>
-          </Router>
-        </AuthManager>
-      </AuthContextProvider>
+    <AuthContextProvider>
+      <AuthManager>
+        <Router>
+          <Routes>
+            <Route path='/login' element={<LogIn />} />
+            <Route path='/register' element={<Register />} />
+            
+            {/* Protected Routes */}
+            <Route element={<PersistantLogin />}>
+              <Route path='/' element={<Home />} />
+              <Route path='/profile/:id' element={<Profile />} />
+              <Route path='/tweet/:id' element={<Tweet />} />
+            </Route>
+            
+            {/* Catch-all route for 404 */}
+            <Route path='/404' element={<NotFound />} />
+            <Route path='*' element={<Navigate to="/404" />} />
+          </Routes>
+        </Router>
+      </AuthManager>
       <ToastContainer
         position="top-right"
         autoClose={5000}
       />
-    </>
+    </AuthContextProvider>
   );
 }
 
@@ -59,4 +57,5 @@ function PersistantLogin() {
 }
 
 export default App;
+
 
