@@ -13,52 +13,43 @@ import Register from './pages/register';
 import Home from './pages/home';
 import Profile from './pages/profile';
 import Tweet from './pages/tweet';
-
 import NotFound from './pages/not-found';
 
 function App() {
   return (
-    <>
-      <AuthContextProvider>
+    <AuthContextProvider>
       <AuthManager>
         <Router>
           <Routes>
-
-            <Route exact path='/login' element={< LogIn />}/>
-            <Route exact path='/register' element={< Register />}/>
+            <Route path='/login' element={<LogIn />} />
+            <Route path='/register' element={<Register />} />
 
             <Route element={<PersistantLogin />}>
-              <Route exact path='/' element={< Home />}/>
-              <Route exact path='/profile/:id' element={< Profile />}/>
-              <Route exact path='/tweet/:id' element={< Tweet />}/>
+              <Route path='/' element={<Home />} />
+              <Route path='/profile/:id' element={<Profile />} />
+              <Route path='/tweet/:id' element={<Tweet />} />
             </Route>
 
-            {/* Not found */}
-            <Route path='*' element={ <Navigate to="/404" /> } />
-            <Route path='/404' element={< NotFound />} />
+            {/* Catch-all route for 404 */}
+            <Route path='*' element={<NotFound />} />
           </Routes>
         </Router>
-
-        </AuthManager>
-      </AuthContextProvider>
-      <ToastContainer 
-        position="top-right"
-        autoClose={5000}
-      />
-    </>
+      </AuthManager>
+      <ToastContainer position="top-right" autoClose={5000} />
+    </AuthContextProvider>
   );
 }
 
 function PersistantLogin() {
-
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
-    if(user.state === USER_STATE.FAILED) navigate('/login');
-  }, [user.state, navigate])
+    if (user.state === USER_STATE.FAILED) navigate('/login');
+  }, [user.state, navigate]);
 
   return <Outlet />;
 }
 
 export default App;
+
