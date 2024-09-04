@@ -24,14 +24,15 @@ function App() {
             <Routes>
               <Route path='/login' element={<LogIn />} />
               <Route path='/register' element={<Register />} />
-
+              
+              {/* Protected Routes */}
               <Route element={<PersistantLogin />}>
                 <Route path='/' element={<Home />} />
                 <Route path='/profile/:id' element={<Profile />} />
                 <Route path='/tweet/:id' element={<Tweet />} />
               </Route>
-
-              {/* Not found */}
+              
+              {/* Catch-all route for 404 */}
               <Route path='*' element={<Navigate to="/404" />} />
               <Route path='/404' element={<NotFound />} />
             </Routes>
@@ -58,3 +59,4 @@ function PersistantLogin() {
 }
 
 export default App;
+
